@@ -30,7 +30,7 @@ public class CardController {
     }
 
     @GetMapping("/{numeroCartao}")
-    public ResponseEntity<BigDecimal> getSaldo(@PathVariable String numeroCartao) {
+    public ResponseEntity<BigDecimal> getSaldo(@PathVariable @Valid String numeroCartao) {
         try {
             BigDecimal saldo = cardService.getSaldo(numeroCartao);
             return new ResponseEntity<>(saldo, HttpStatus.OK);
