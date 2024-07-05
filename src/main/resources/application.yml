@@ -11,11 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.MySQLDialect
-
-  mongodb:
-    uri: mongodb://user:password@localhost:27017/miniautorizador
 
 server:
   port: 8080
