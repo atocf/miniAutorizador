@@ -15,27 +15,27 @@ public class CardService {
 
     public Card createCard(String numeroCartao, String senha) {
         if (cardRepository.existsById(numeroCartao)) {
-            throw new IllegalArgumentException("Cartão já existe");
+            throw new IllegalArgumentException("CARTAO_EXISTENTE");
         }
         return cardRepository.save(new Card(numeroCartao, senha));
     }
 
     public BigDecimal getSaldo(String numeroCartao) {
         Card card = cardRepository.findById(numeroCartao)
-                .orElseThrow(() -> new IllegalArgumentException("Cartão não existe"));
+                .orElseThrow(() -> new IllegalArgumentException("CARTAO_INEXISTENTE"));
         return card.getSaldo();
     }
 
     public void processTransaction(String numeroCartao, String senha, BigDecimal valor) {
         Card card = cardRepository.findById(numeroCartao)
-                .orElseThrow(() -> new IllegalArgumentException("Cartão não existe"));
+                .orElseThrow(() -> new IllegalArgumentException("CARTAO_INEXISTENTE"));
 
         if (!card.getSenha().equals(senha)) {
-            throw new IllegalArgumentException("Senha inválida");
+            throw new IllegalArgumentException("SENHA_INVALIDA");
         }
 
         if (card.getSaldo().compareTo(valor) < 0) {
-            throw new IllegalArgumentException("Saldo insuficiente");
+            throw new IllegalArgumentException("SALDO_INSUFICIENTE");
         }
 
         card.setSaldo(card.getSaldo().subtract(valor));

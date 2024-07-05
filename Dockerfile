@@ -27,8 +27,8 @@ RUN wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for
 # Copiar o arquivo JAR da etapa de compilação
 COPY --from=build /app/target/*.jar app.jar
 
-# Expor a porta 8080
-EXPOSE 8080
+# Expor a porta 9080
+EXPOSE 9080
 
 # Comando para executar a aplicação
 ENTRYPOINT ["/usr/local/bin/wait-for-it.sh", "mysql:3306", "--", "java", "-jar", "app.jar"]
